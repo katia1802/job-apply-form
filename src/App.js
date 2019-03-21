@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hamburgerOpen: false
+      hamburgerOpen: false,
+
     };
     this.toggleHamburger = this.toggleHamburger.bind(this);
   }
@@ -21,6 +22,8 @@ class App extends Component {
       });
     }
   }
+
+
   render() {
     return (
       <div className="App">
