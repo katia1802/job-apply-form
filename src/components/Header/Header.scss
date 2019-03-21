@@ -1,0 +1,15 @@
+ul{
+    width: 100%;
+    list-style: none;
+    display: grid;
+    text-align: center;
+    grid-template-columns: repeat(4, 40%);
+    grid-gap: 18px; //si la pantalla se pone bailonga toquetear el gap
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.Hamburger_icon{
+    height: 30px;
+    width: auto;
+}

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Footer extends Component {
     render() { 
         return ( 
-            <footer>
             <div>
               <div>back to top</div>
               <nav>
@@ -14,7 +13,6 @@ class Footer extends Component {
                 </ul>
               </nav>
             </div>
-          </footer>
 
          );
     }
