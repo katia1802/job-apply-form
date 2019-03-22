@@ -5,6 +5,7 @@ class Footer extends Component {
     return (
       <div>
         <footer>
+          <div>FAQ</div>
           <nav>
               <a 
               className="footer--github-llink"

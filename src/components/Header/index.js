@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import Workspace from "../../images/Workspace.jpg";
 import "./Header.scss";
 import Toolbar from "../Toolbar";
-import "./Header.scss";
+import SideDrawer from "../SideDrawer/SideDrawer";
 
 class Header extends Component {
   render() {
     return (
       <div>
-        <header>
-          <div>
-            <Toolbar />
-          </div>
-            <div>
-              <img alt="" src={Workspace} />
-            </div>
+        <header className="header">
+          <Toolbar />
+          <SideDrawer/>
         </header>
+
+        <div>
+          <img alt="" src={Workspace} />
+        </div>
       </div>
     );
   }

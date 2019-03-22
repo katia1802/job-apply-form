@@ -1,15 +1,10 @@
-ul{
+
+.header{
+    position: fixed;
+    background-color:purple;
     width: 100%;
-    list-style: none;
-    display: grid;
-    text-align: center;
-    grid-template-columns: repeat(4, 40%);
-    grid-gap: 18px; //si la pantalla se pone bailonga toquetear el gap
-    font-size: 22px;
-    text-transform: uppercase;
+    height:60px;
+    top:0;
+    left: 0;
 }
 
-.Hamburger_icon{
-    height: 30px;
-    width: auto;
-}
