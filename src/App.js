@@ -5,15 +5,6 @@ import Form from "./components/Form";
 import Footer from "./components/Footer";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hamburgerOpen: false
-    };
-  }
-
-
-
   render() {
     return (
       <div className="App">

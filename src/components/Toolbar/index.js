@@ -4,9 +4,13 @@ import ToggleSideButton from "../SideDrawer/ToogleSideButton.js";
 
 class Toolbar extends Component {
   render() {
+    const {drawerClickHandler}=this.props
+    console.log ('holi', this.props)
     return (
       <nav className="toolbar__navigation">
-        <ToggleSideButton/>
+        <ToggleSideButton
+        click={drawerClickHandler}
+        />
         <div className="toolbar__logo">Logo</div>
       <div className="spacer"/>
         <ul className="toolbar__navigation-items">
