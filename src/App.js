@@ -8,8 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hamburgerOpen: false,
-
+      hamburgerOpen: false
     };
     this.toggleHamburger = this.toggleHamburger.bind(this);
   }
@@ -23,18 +22,21 @@ class App extends Component {
     }
   }
 
-
   render() {
     return (
       <div className="App">
         <body>
           <Header toggleHamburger={this.toggleHamburger} />
           <main>
+            <h1 className="main--form-title">Job Apply Form</h1>
+            <p className="main--form-text">Please fill the form </p>
+            <p className="main--form-subtext">
+              All areas with <span className="main--form-asterik">*</span>{" "}
+              required
+            </p>
             <Form />
           </main>
-          <footer>
             <Footer />
-          </footer>
         </body>
       </div>
     );
