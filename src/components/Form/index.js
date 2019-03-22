@@ -12,9 +12,9 @@ class Form extends Component {
       address: "",
       houseNumber: "",
       zipcode: "",
+      file: new FileReader(),
       letter: "",
-      submitting: false,
-      
+      submitting: false
     };
     this.handleName = this.handleName.bind(this);
     this.handleDate = this.handleDate.bind(this);
@@ -23,7 +23,7 @@ class Form extends Component {
     this.handleHouseNumber = this.handleHouseNumber.bind(this);
     this.handleZipcode = this.handleZipcode.bind(this);
     this.handleLetter = this.handleLetter.bind(this);
-    this.handleSubmit = this.handleSubmit.bind (this)
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleName(e) {
     this.setState({
@@ -59,6 +59,13 @@ class Form extends Component {
       zipcode: e.target.value
     });
   }
+
+  handleSelectedFile(e) {
+    this.setState({
+      file: e.target.files[0]
+    });
+  }
+
 
   handleLetter(e) {
     this.setState({
@@ -150,6 +157,9 @@ class Form extends Component {
               required
               pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
             />
+          </div>
+          <div>
+            <input type="file" accept=".doc, .docx, .pdf, .rtf, .txt" onChange={this.handleSelectedFile} />
           </div>
           <div>
             <label>Motivational Letter</label>

@@ -10,23 +10,15 @@ class App extends Component {
     this.state = {
       hamburgerOpen: false
     };
-    this.toggleHamburger = this.toggleHamburger.bind(this);
   }
 
-  toggleHamburger(event) {
-    console.log("event target", event);
-    if (event.target.className.includes("Hamburger_icon")) {
-      this.setState({
-        hamburgerOpen: true
-      });
-    }
-  }
+
 
   render() {
     return (
       <div className="App">
         <body>
-          <Header toggleHamburger={this.toggleHamburger} />
+          <Header />
           <main>
             <h1 className="main--form-title">Job Apply Form</h1>
             <p className="main--form-text">Please fill the form </p>
