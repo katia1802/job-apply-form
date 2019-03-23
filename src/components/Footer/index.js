@@ -13,7 +13,7 @@ class Footer extends Component {
               target="_blank"
               rel="noopener noreferrer"
               >
-              <i class="fab fa-github-square"/><span>Github</span>
+              <i className="fab fa-github-square"/><span>Github</span>
               </a>
 
               <a 
@@ -22,7 +22,7 @@ class Footer extends Component {
               target="_blank"
               rel="noopener noreferrer"
               >
-              <i class="fab fa-linkedin"/><span>Linkedin</span>
+              <i className="fab fa-linkedin"/><span>Linkedin</span>
               </a>
               
               <a 
@@ -31,7 +31,7 @@ class Footer extends Component {
               target="_blank"
               rel="noopener noreferrer"
               >
-              <i class="fab fa-twitter-square"/><span>Linkedin</span>
+              <i className="fab fa-twitter-square"/><span>Linkedin</span>
               </a>
               </nav>
         </footer>

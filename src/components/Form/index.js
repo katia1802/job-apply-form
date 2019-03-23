@@ -1,23 +1,48 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 
+const formValid = formErrros => {
+  let valid = true;
+
+  Object.values(formErrros).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+  return valid;
+};
+
+const emailRegex = RegExp(
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+);
+
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
       startDate: new Date(),
-      name: "",
-      birth: "",
+      fullName: "",
       email: "",
+      gender: "",
       address: "",
       houseNumber: "",
       zipcode: "",
       file: new FileReader(),
       letter: "",
-      submitting: false
+      submitting: false,
+      formErrors: {
+        fullName: "",
+        email: "",
+        gender: "",
+        address: "",
+        houseNumber: "",
+        zipcode: "",
+        file: "",
+        letter: "",
+        submitting: "Thanks for submitting :)"
+      }
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleName = this.handleName.bind(this);
-    this.handleDate = this.handleDate.bind(this);
+    this.handleDate=this.handleDate.bind(this)
     this.handleEmail = this.handleEmail.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
     this.handleHouseNumber = this.handleHouseNumber.bind(this);
@@ -25,16 +50,39 @@ class Form extends Component {
     this.handleLetter = this.handleLetter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChange(e) {
+    e.preventDefault();
+    const { name, value } = e.target;
+    let formErrors = this.state.formErrors;
+
+    switch (name) {
+      case "fullName":
+        formErrors.fullName =
+          value.length < 3 && value.length > 0
+            ? "minimum 3 characters required"
+            : "";
+        break;
+      case "email":
+        formErrors.email =
+          emailRegex.test(value) && value.length > 0
+            ? ""
+            : "invalid email address";
+        break;
+      default:
+        break;
+    }
+  }
   handleName(e) {
     this.setState({
-      name: e.target.value
+      fullName: e.target.value
     });
   }
 
-  handleDate(date) {
+  handleDate (date){
     this.setState({
-      startDate: date
-    });
+      startDate:date
+    })
   }
 
   handleEmail(e) {
@@ -66,54 +114,66 @@ class Form extends Component {
     });
   }
 
-
   handleLetter(e) {
     this.setState({
       letter: e.target.value
     });
   }
   handleSubmit(e) {
-    //aqui está la funcion que hace que se al hacer click escuche el evento
     e.preventDefault();
-    console.log("submitted");
+
+    if (formValid(this.state.formErrors)) {
+      console.log(`
+      --submitting--
+      first: ${this.state.name}
+      email: ${this.state.email}
+      `);
+    } else {
+      console.error("form invalid");
+    }
   }
 
   render() {
     return (
       <div className="main">
-        <form onSubmit={this.handleSubmit} className="form">
-          <div>
+        <form onSubmit={this.handleSubmit} className="form" noValidate>
+          {/* name */}
+          <div className="form-name">
             <label>
-              First and Last Name<span className="main--form-asterik">*</span>
+              First and Last Name<span className="form-asterisk">*</span>
             </label>
             <input
               type="text"
-              value={this.state.name}
+              name="fullName"
+              value={this.state.fullName}
               onChange={this.handleName}
               placeholder="Katia Rojas Sandoval"
               required
             />
           </div>
-
-          <div className="form--birthdate">
+          {/* birthdate */}
+          <div className="form-birthdate">
             <label>
-              Date of Birth<span className="main--form-asterik">*</span>
+              Date of Birth<span className="form-asterisk">*</span>
             </label>
-            <DatePicker
-              selected={this.state.startDate}
-              onChange={this.handleDate}
-              showYearDropdown
-              dateFormatCalendar="MMMM"
-              scrollableYearDropdown
-              yearDropdownItemNumber={15}
-              required
-            />
+            <div>
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.handleDate}
+                showYearDropdown
+                dateFormatCalendar="MMMM"
+                scrollableYearDropdown
+                yearDropdownItemNumber={15}
+              />
+            </div>
           </div>
-          <div>
+          {/* email */}
+          <div className="form-email">
             <label>
-              Email Address<span className="main--form-asterik">*</span>
+              Email Address<span className="form-asterisk">*</span>
             </label>
             <input
+              name="email"
               type="email"
               value={this.state.email}
               onChange={this.handleEmail}
@@ -121,27 +181,36 @@ class Form extends Component {
               required
             />
           </div>
-          <div>
+          {/* gender */}
+          <div className="form-gender">
             <label>
-              Gender<span className="main--form-asterik">*</span>
-              <input
-              // type="radio"
-              // checked={boolean}
-              />
+              Gender<span className="form-asterisk">*</span>
+              <select
+                name="gender"
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <option>Female</option>
+                <option>Male</option>
+              </select>
             </label>
           </div>
+          {/* address */}
           <div>
             <label>
-              Address<span className="main--form-asterik">*</span>
+              Address<span className="form-asterisk">*</span>
             </label>
             <input
+              name="address"
               type="text"
               value={this.state.address}
               onChange={this.handleAddress}
               placeholder="streetname"
               required
             />
+            {/* house number */}
             <input
+              name="house number"
               type="text"
               value={this.state.houseNumber}
               onChange={this.handleHouseNumber}
@@ -149,7 +218,9 @@ class Form extends Component {
               placeholder="house number"
               required
             />
+            {/* zipcode */}
             <input
+              name="zipcode"
               type="text"
               value={this.state.zipcode}
               onChange={this.handleZipcode}
@@ -158,18 +229,27 @@ class Form extends Component {
               pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
             />
           </div>
+          {/* file */}
           <div>
-            <input type="file" accept=".doc, .docx, .pdf, .rtf, .txt" onChange={this.handleSelectedFile} />
+            <input
+              name="file"
+              type="file"
+              accept=".doc, .docx, .pdf, .rtf, .txt"
+              onChange={this.handleSelectedFile}
+            />
           </div>
+          {/* motivational letter */}
           <div>
             <label>Motivational Letter</label>
             <textarea
+              name="letter"
               type="text"
               value={this.state.letter}
               onChange={this.handleLetter}
               placeholder="Let the company know more about you!"
             />
           </div>
+          {/* submit */}
           <div>
             <button
               type="button"
@@ -178,6 +258,7 @@ class Form extends Component {
             >
               Submit
             </button>
+            <small>Already have an account?</small>
           </div>
         </form>
       </div>

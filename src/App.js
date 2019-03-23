@@ -7,21 +7,21 @@ import Footer from "./components/Footer";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <body>
+      <body>
+        <div className="App">
           <Header />
           <main>
             <h1 className="main--form-title">Job Apply Form</h1>
             <p className="main--form-text">Please fill the form </p>
             <p className="main--form-subtext">
-              All areas with <span className="main--form-asterik">*</span>{" "}
+              All areas with <span className="form-asterisk">*</span>{" "}
               required
             </p>
             <Form />
           </main>
-            <Footer />
-        </body>
-      </div>
+          <Footer />
+        </div>
+      </body>
     );
   }
 }

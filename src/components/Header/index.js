@@ -11,7 +11,8 @@ class Header extends Component {
     this.state = {
       sideDrawerOpen: false
     };
-    this.drawerToogleClickHandler= this.drawerToogleClickHandler.bind(this)
+    this.drawerToogleClickHandler = this.drawerToogleClickHandler.bind(this);
+    this.backdropClickHandler = this.backdropClickHandler.bind(this);
   }
 
   drawerToogleClickHandler() {
@@ -19,21 +20,24 @@ class Header extends Component {
       return { sideDrawerOpen: !prevState.sideDrawerOpen };
     });
   }
+
+  backdropClickHandler() {
+    this.setState({
+      sideDrawerOpen: false
+    });
+  }
+
   render() {
-    let sideDrawer;
     let backdrop;
 
     if (this.state.sideDrawerOpen) {
-      sideDrawer = <SideDrawer />;
-      backdrop = <Backdrop />;
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
     }
     return (
       <div>
         <header className="header">
-          <Toolbar 
-          drawerClickHandler={this.drawerToogleClickHandler}
-          />
-          {sideDrawer}
+          <Toolbar drawerClickHandler={this.drawerToogleClickHandler} />
+          <SideDrawer show={this.state.sideDrawerOpen}/>
           {backdrop}
         </header>
 

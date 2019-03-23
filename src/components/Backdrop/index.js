@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import "./Backdrop.scss"
 
 class Backdrop extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
     render() { 
+        const {click} = this.props
         return ( 
-            <div className="backdrop"/>
+            <div className="backdrop" onClick={click}/>
          );
     }
 }
