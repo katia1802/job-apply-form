@@ -40,7 +40,7 @@ class Form extends Component {
     // this.handleName = this.handleName.bind(this);
     this.handleDate = this.handleDate.bind(this);
     // this.handleEmail = this.handleEmail.bind(this);
-    this.handleAddress = this.handleAddress.bind(this);
+    // this.handleAddress = this.handleAddress.bind(this);
     this.handleHouseNumber = this.handleHouseNumber.bind(this);
     this.handleZipcode = this.handleZipcode.bind(this);
     this.handleLetter = this.handleLetter.bind(this);
@@ -55,19 +55,32 @@ class Form extends Component {
     console.log ("value : ", value)
 
     switch (name) {
-      case "fullName":
+        case "fullName":
         formErrors.fullName =
           value.length < 3 && value.length > 0
             ? "minimum 3 characters required"
             : "";
         break;
-      case "email":
+      
+        case "email":
         formErrors.email =
         RegExp(
           /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
         ).test(value) && value.length > 0
             ? ""
             : "invalid email address";
+        break;
+        
+        case "gender":
+        formErrors.gender=
+        RegExp(/^male$||^female$/).test(value)?
+        "": "please choose a gender";
+        break;
+
+        case "address":
+        formErrors.address=
+        RegExp(/^\d+\s[A-z]+\s[A-z]+/).test(value) && value.length >0?
+        "": "please fill your address";
         break;
 
       default:
@@ -85,7 +98,6 @@ class Form extends Component {
   //   this.setState({
   //     fullName: e.target.value
   //   });
-  // }
 
   handleDate(date) {
     this.setState({
@@ -99,11 +111,11 @@ class Form extends Component {
   //   });
   // }
 
-  handleAddress(e) {
-    this.setState({
-      address: e.target.value
-    });
-  }
+  // handleAddress(e) {
+  //   this.setState({
+  //     address: e.target.value
+  //   });
+  // }
 
   handleHouseNumber(e) {
     this.setState({
@@ -197,6 +209,7 @@ class Form extends Component {
                 name="gender"
                 value={this.state.value}
                 onChange={this.handleChange}
+                required
               >
                 <option>Female</option>
                 <option>Male</option>
@@ -212,7 +225,7 @@ class Form extends Component {
               name="address"
               type="text"
               value={this.state.address}
-              onChange={this.handleAddress}
+              onChange={this.handleChange}
               placeholder="streetname"
               required
             />
