@@ -10,10 +10,6 @@ const formValid = formErrros => {
   return valid;
 };
 
-const emailRegex = RegExp(
-  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-);
-
 class Form extends Component {
   constructor(props) {
     super(props);
@@ -41,9 +37,9 @@ class Form extends Component {
       }
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleName = this.handleName.bind(this);
-    this.handleDate=this.handleDate.bind(this)
-    this.handleEmail = this.handleEmail.bind(this);
+    // this.handleName = this.handleName.bind(this);
+    this.handleDate = this.handleDate.bind(this);
+    // this.handleEmail = this.handleEmail.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
     this.handleHouseNumber = this.handleHouseNumber.bind(this);
     this.handleZipcode = this.handleZipcode.bind(this);
@@ -55,6 +51,8 @@ class Form extends Component {
     e.preventDefault();
     const { name, value } = e.target;
     let formErrors = this.state.formErrors;
+    console.log('name: ', name)
+    console.log ("value : ", value)
 
     switch (name) {
       case "fullName":
@@ -65,31 +63,41 @@ class Form extends Component {
         break;
       case "email":
         formErrors.email =
-          emailRegex.test(value) && value.length > 0
+        RegExp(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+        ).test(value) && value.length > 0
             ? ""
             : "invalid email address";
         break;
+
       default:
         break;
     }
+    this.setState(
+      {
+        formErrors,
+        [name]: value
+      },
+      () => console.log(this.state)
+    );
   }
-  handleName(e) {
+  // handleName(e) {
+  //   this.setState({
+  //     fullName: e.target.value
+  //   });
+  // }
+
+  handleDate(date) {
     this.setState({
-      fullName: e.target.value
+      startDate: date
     });
   }
 
-  handleDate (date){
-    this.setState({
-      startDate:date
-    })
-  }
-
-  handleEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
+  // handleEmail(e) {
+  //   this.setState({
+  //     email: e.target.value
+  //   });
+  // }
 
   handleAddress(e) {
     this.setState({
@@ -146,7 +154,7 @@ class Form extends Component {
               type="text"
               name="fullName"
               value={this.state.fullName}
-              onChange={this.handleName}
+              onChange={this.handleChange}
               placeholder="Katia Rojas Sandoval"
               required
             />
@@ -176,7 +184,7 @@ class Form extends Component {
               name="email"
               type="email"
               value={this.state.email}
-              onChange={this.handleEmail}
+              onChange={this.handleChange}
               placeholder="hola@endouble.com"
               required
             />
