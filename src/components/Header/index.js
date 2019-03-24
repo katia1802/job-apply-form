@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Workspace from "../../images/Workspace.jpg";
 import "./Header.scss";
 import Toolbar from "../Toolbar";
 import SideDrawer from "../SideDrawer/SideDrawer";
@@ -37,12 +36,12 @@ class Header extends Component {
       <div>
         <header className="header">
           <Toolbar drawerClickHandler={this.drawerToogleClickHandler} />
-          <SideDrawer show={this.state.sideDrawerOpen}/>
+          <SideDrawer show={this.state.sideDrawerOpen} />
           {backdrop}
         </header>
 
-        <div>
-          <img alt="" src={Workspace} />
+        <div className="hero">
+          <div className="cover" />
         </div>
       </div>
     );

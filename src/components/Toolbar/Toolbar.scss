@@ -1,53 +1,57 @@
+@import "../../assets/core/setting";
+
 .toolbar__navigation {
-    display: flex;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .toolbar__logo {
-    color: #7A93AC;
-    margin-left: 0.5rem;
-    text-transform: uppercase;
+  color: $lightGrey;
+  font-family: $fontText;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
 }
 
 .toolbar__logo a {
-    text-decoration: none;
-    font-size: 1.5rem;
+  text-decoration: none;
+  font-size: 1.5rem;
 }
 
 .spacer {
-    flex: 0.5;
+  flex: 0.5;
 }
 
 .toolbar__navigation-items {
-    text-transform: uppercase;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: none;
+  text-transform: uppercase;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
 }
 
 .toolbar__navigation-items a:hover,
 .toolbar__navigation-items a:active {
-    color: lightblue;
-    border: white
+  color: lightblue;
+  border: white;
 }
 
 .toolbar__navigation-itemlink {
-    text-decoration: none;
-    color: #7A93AC
+  text-decoration: none;
+  color: $lightGrey;
+  font-family: $fontText;
 }
 
-@media all and (min-width:500px) {
-    .toolbar__navigation-items {
-        display: grid;
-        grid-template-columns: repeat(4, 30%);
-        grid-gap: 8px; //si la pantalla se pone bailonga toquetear el gap
-    }
-    .toolbar__toogle-button {
-        display: none
-    }
-    .toolbar__logo{
-        margin-left: 1rem;
-    }
+@media all and (min-width: 500px) {
+  .toolbar__navigation-items {
+    display: grid;
+    grid-template-columns: repeat(4, 30%);
+    grid-gap: 8px; //si la pantalla se pone bailonga toquetear el gap
+  }
+  .toolbar__toogle-button {
+    display: none;
+  }
+  .toolbar__logo {
+    margin-left: 1rem;
+  }
 }

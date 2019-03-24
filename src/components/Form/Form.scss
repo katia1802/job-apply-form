@@ -1,5 +1,83 @@
+@import '../../assets/core/setting';
+*{
+    box-sizing: content-box;
+    margin:0px;
+    padding: 0;
+}
+
+.form-padding{
+    margin-top: 250px;
+}
+
+// .form-wrapper{
+//     display: flex;
+//     flex-direction: row;
+// }
+
+// .block-number-zipcode{
+//     display: block;
+// }
+
+.form-item {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 27px auto;
+    padding: 0px;
+}
+
 .form-message-error{
     color: red;
     margin-left: 0.5rem
-
 }
+.form-title{
+    font-family: $fontText;
+    color: $darkGreen;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+}
+
+.form-text{
+    font-family: $fontText;
+    font-size: $fontSmall;
+    color: $darkGrey;
+    text-align: center;
+    margin: 18px auto;  
+}
+
+.form-subtext{
+    font-family: $fontText;
+    font-size: $fontSuperSmall;
+    color: $darkGrey;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.form-asterisk {
+    font-family: $fontText;
+    font-size: $fontSuperSmall;
+    color: $darkGreen;
+  }
+  
+  .form-label{
+      font-family: $fontText;
+      font-size: $fontSmall;
+      display: block;
+      margin: 1px 0px 11px 0px;
+  }
+  
+  .form-field{
+    box-sizing: border-box;
+    height: 45px;
+    padding: 5px 5px;
+    margin: 0px;
+    width: 100%;
+    border-radius: 5px; 
+    font-family: $fontText;
+
+  }
+  .form-field-text{
+
+  }
+
