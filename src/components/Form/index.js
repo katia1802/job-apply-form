@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-// import DatePicker from "react-datepicker";
-
-const formValid = formErrros => {
-  let valid = true;
-
-  Object.values(formErrros).forEach(val => {
-    val.length > 0 && (valid = false);
-  });
-  return valid;
-};
+import "./Form.scss";
 
 class Form extends Component {
   constructor(props) {
@@ -23,7 +14,7 @@ class Form extends Component {
       zipcode: "",
       file: new FileReader(),
       letter: "",
-      submitting: false,
+      submitting: true,
       formErrors: {
         fullName: "",
         birthDate: "",
@@ -32,19 +23,11 @@ class Form extends Component {
         address: "",
         houseNumber: "",
         zipcode: "",
-        file: "",
-        letter: "",
-        submitting: "Thanks for submitting :)"
+        file: "ok",
+        letter: "ok",
       }
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleName = this.handleName.bind(this);
-    // this.handleDate = this.handleDate.bind(this);
-    // this.handleEmail = this.handleEmail.bind(this);
-    // this.handleAddress = this.handleAddress.bind(this);
-    // this.handleHouseNumber = this.handleHouseNumber.bind(this);
-    // this.handleZipcode = this.handleZipcode.bind(this);
-    // this.handleLetter = this.handleLetter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -59,16 +42,16 @@ class Form extends Component {
       case "fullName":
         formErrors.fullName =
           value.length < 3 && value.length > 0
-            ? "minimum 3 characters required"
-            : "";
+            ? "! Minimum 3 characters required"
+            : "ok";
         break;
 
       case "birthDate":
         formErrors.birthDate = RegExp(
           /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
         ).test(value)
-          ? ""
-          : "enter DD/MM/YYYY birthdate format";
+          ? "ok"
+          : "! Enter DD/MM/YYYY birthdate format";
         break;
 
       case "email":
@@ -76,33 +59,33 @@ class Form extends Component {
           RegExp(
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
           ).test(value) && value.length > 0
-            ? ""
-            : "invalid email address";
+            ? "ok"
+            : "! Invalid email address";
         break;
 
       case "gender":
         formErrors.gender =
           RegExp(/^male$||^female$/).test(value) && value.length > 0
-            ? ""
-            : "please choose a gender";
+            ? "ok"
+            : "! Please choose a gender";
         break;
 
       case "address":
         formErrors.address =
-          value.length < 2 && value.length > 0 ? "street name required" : "";
+          value.length < 2 && value.length > 0 ? "street name required" : "ok";
         break;
 
       case "houseNumber":
         formErrors.houseNumber =
           RegExp(/^[0-9]*$/).test(value) && value.length > 0
-            ? ""
-            : "numeric characters required";
+            ? "ok"
+            : "! Numeric characters required";
         break;
 
       case "zipcode":
         formErrors.zipcode = RegExp(/^([0-9]{4}[ ]+[a-zA-Z]{2})$/).test(value)
-          ? ""
-          : "please enter a valid dutch zipcode";
+          ? "ok"
+          : "! Please enter a valid dutch zipcode";
         break;
 
       default:
@@ -116,64 +99,24 @@ class Form extends Component {
       () => console.log(this.state)
     );
   }
-  // handleName(e) {
-  //   this.setState({
-  //     fullName: e.target.value
-  //   });
 
-  // handleDate(date) {
-  //   this.setState({
-  //     birthDate: date
-  //   });
-  // }
-
-  // handleEmail(e) {
-  //   this.setState({
-  //     email: e.target.value
-  //   });
-  // }
-
-  // handleAddress(e) {
-  //   this.setState({
-  //     address: e.target.value
-  //   });
-  // }
-
-  // handleHouseNumber(e) {
-  //   this.setState({
-  //     houseNumber: e.target.value
-  //   });
-  // }
-  // handleZipcode(e) {
-  //   this.setState({
-  //     zipcode: e.target.value
-  //   });
-  // }
-
-  // handleSelectedFile(e) {
-  //   this.setState({
-  //     file: e.target.files[0]
-  //   });
-  // }
-
-  // handleLetter(e) {
-  //   this.setState({
-  //     letter: e.target.value
-  //   });
-  // }
-  handleSubmit(e) {
-    e.preventDefault();
-
-    if (formValid(this.state.formErrors)) {
-      console.log(`
-      --submitting--
-      first: ${this.state.name}
-      email: ${this.state.email}
-      `);
-    } else {
-      console.error("form invalid");
-    }
+handleSubmit(e){
+  e.preventDefault();
+  if(this.state.formErrors.fullName==='ok'
+  &&this.state.formErrors.birthDate==='ok'
+  &&this.state.formErrors.email==='ok'
+  &&this.state.formErrors.gender==='ok'
+  &&this.state.formErrors.address==='ok'
+  &&this.state.formErrors.houseNumber==='ok'
+  &&this.state.formErrors.zipcode==='ok'
+  &&this.state.formErrors.file==='ok'
+  &&this.state.formErrors.letter==='ok'
+  ){
+    alert('Thanks for submitting')
+  } else {
+    alert ('no validado')
   }
+}
 
   render() {
     return (
@@ -315,12 +258,10 @@ class Form extends Component {
           <div>
             <button
               type="button"
-              disabled={this.state.submitting}
               onClick={this.handleSubmit}
             >
               Submit
             </button>
-            <small>Already have an account?</small>
           </div>
         </form>
       </div>
