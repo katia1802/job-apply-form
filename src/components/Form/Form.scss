@@ -1,22 +1,41 @@
 @import '../../assets/core/setting';
-*{
+* {
     box-sizing: content-box;
-    margin:0px;
+    margin: 0px;
     padding: 0;
 }
 
-.form-padding{
-    margin-top: 250px;
+.form-padding {
+    margin-top: 190px;
 }
 
 // .form-wrapper{
 //     display: flex;
 //     flex-direction: row;
 // }
-
 // .block-number-zipcode{
 //     display: block;
 // }
+.form-message-error {
+    color: red;
+    margin-left: 0.5rem
+}
+
+.form-title {
+    font-family: $fontText;
+    color: $darkGreen;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+}
+
+.form-text {
+    font-family: $fontText;
+    font-size: $fontSmall;
+    color: $darkGrey;
+    text-align: center;
+    margin: 18px auto;
+}
 
 .form-item {
     width: 90%;
@@ -26,27 +45,7 @@
     padding: 0px;
 }
 
-.form-message-error{
-    color: red;
-    margin-left: 0.5rem
-}
-.form-title{
-    font-family: $fontText;
-    color: $darkGreen;
-    display: block;
-    text-align: center;
-    font-weight: 500;
-}
-
-.form-text{
-    font-family: $fontText;
-    font-size: $fontSmall;
-    color: $darkGrey;
-    text-align: center;
-    margin: 18px auto;  
-}
-
-.form-subtext{
+.form-subtext {
     font-family: $fontText;
     font-size: $fontSuperSmall;
     color: $darkGrey;
@@ -58,26 +57,46 @@
     font-family: $fontText;
     font-size: $fontSuperSmall;
     color: $darkGreen;
-  }
-  
-  .form-label{
-      font-family: $fontText;
-      font-size: $fontSmall;
-      display: block;
-      margin: 1px 0px 11px 0px;
-  }
-  
-  .form-field{
+}
+
+.form-label {
+    font-family: $fontText;
+    font-size: $fontSmall;
+    display: block;
+    margin: 1px 0px 11px 0px;
+}
+
+.form-field {
     box-sizing: border-box;
     height: 45px;
     padding: 5px 5px;
     margin: 0px;
     width: 100%;
-    border-radius: 5px; 
+    border-radius: 5px;
     font-family: $fontText;
+    font-size: $fontSmall
+}
 
-  }
-  .form-field-text{
+.form-field-text {
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+    font-family: $fontText;
+    font-size: $fontSmall;
+    padding: 5px;
+    margin: 0;
+}
 
-  }
-
+.form-submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    margin-top: 30px;
+    color: $darkGrey;
+    background: $lightGreen;
+    font-family: $fontText;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}

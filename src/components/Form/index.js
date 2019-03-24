@@ -42,16 +42,16 @@ class Form extends Component {
       case "fullName":
         formErrors.fullName =
           value.length < 3 && value.length > 0
-            ? "! Minimum 3 characters required"
-            : "ok";
+            ? "Minimum 3 characters required"
+            : "";
         break;
 
       case "birthDate":
         formErrors.birthDate = RegExp(
           /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
         ).test(value)
-          ? "ok"
-          : "! Enter DD/MM/YYYY birthdate format";
+          ? ""
+          : "Enter DD/MM/YYYY birthdate format";
         break;
 
       case "email":
@@ -59,33 +59,33 @@ class Form extends Component {
           RegExp(
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
           ).test(value) && value.length > 0
-            ? "ok"
-            : "! Invalid email address";
+            ? ""
+            : "Invalid email address";
         break;
 
       case "gender":
         formErrors.gender =
           RegExp(/^male$||^female$/).test(value) && value.length > 0
-            ? "ok"
-            : "! Please choose a gender";
+            ? ""
+            : "Please choose a gender";
         break;
 
       case "address":
         formErrors.address =
-          value.length < 2 && value.length > 0 ? "street name required" : "ok";
+          value.length < 2 && value.length > 0 ? "street name required" : "";
         break;
 
       case "houseNumber":
         formErrors.houseNumber =
           RegExp(/^[0-9]*$/).test(value) && value.length > 0
-            ? "ok"
-            : "! Numeric characters required";
+            ? ""
+            : "Numeric characters required";
         break;
 
       case "zipcode":
         formErrors.zipcode = RegExp(/^([0-9]{4}[ ]+[a-zA-Z]{2})$/).test(value)
-          ? "ok"
-          : "! Please enter a valid dutch zipcode";
+          ? ""
+          : "Please enter a valid dutch zipcode";
         break;
 
       default:
@@ -103,15 +103,15 @@ class Form extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (
-      this.state.formErrors.fullName === "ok" &&
-      this.state.formErrors.birthDate === "ok" &&
-      this.state.formErrors.email === "ok" &&
-      this.state.formErrors.gender === "ok" &&
-      this.state.formErrors.address === "ok" &&
-      this.state.formErrors.houseNumber === "ok" &&
-      this.state.formErrors.zipcode === "ok" &&
-      this.state.formErrors.file === "ok" &&
-      this.state.formErrors.letter === "ok"
+      this.state.formErrors.fullName === "" &&
+      this.state.formErrors.birthDate === "" &&
+      this.state.formErrors.email === "" &&
+      this.state.formErrors.gender === "" &&
+      this.state.formErrors.address === "" &&
+      this.state.formErrors.houseNumber === "" &&
+      this.state.formErrors.zipcode === "" &&
+      this.state.formErrors.file === "" &&
+      this.state.formErrors.letter === ""
     ) {
       alert("Thanks for submitting");
     } else {
@@ -123,9 +123,11 @@ class Form extends Component {
     return (
       <div className="form-padding">
         <h1 className="form-title">Job Application</h1>
-        <p className="form-text">In order to apply, please fill the following form.</p>
+        <p className="form-text">
+          In order to apply, please fill the following form.
+        </p>
         <p className="form-subtext">
-          All areas with <span className="form-asterisk">*</span> required
+          All areas with <span className="form-asterisk">  *</span> required
         </p>
 
         <div className="form-wrapper">
@@ -133,9 +135,10 @@ class Form extends Component {
             {/* name */}
             <div className="form-name form-item">
               <label className="form-label">
-                First and Last Name<span className="form-asterisk">*</span>
+                First and Last Name<span className="form-asterisk">  *</span>
               </label>
-              <input className="form-field"
+              <input
+                className="form-field"
                 type="text"
                 name="fullName"
                 value={this.state.fullName}
@@ -150,14 +153,15 @@ class Form extends Component {
             {/* birthdate */}
             <div className="form-birthdate form-item">
               <label className="form-label">
-                Date of Birth<span className="form-asterisk">*</span>
+                Date of Birth<span className="form-asterisk">  *</span>
               </label>
-              <input className="form-field"
+              <input
+                className="form-field"
                 type="text"
                 name="birthDate"
                 value={this.state.birthDate}
                 onChange={this.handleChange}
-                placeholder="DD/MM/YYYY"
+                placeholder="dd/mm/yyyy"
                 required
               />
               <div className="form-message-error">
@@ -167,9 +171,10 @@ class Form extends Component {
             {/* email */}
             <div className="form-email form-item">
               <label className="form-label">
-                Email Address<span className="form-asterisk">*</span>
+                Email Address<span className="form-asterisk">  *</span>
               </label>
-              <input className="form-field"
+              <input
+                className="form-field"
                 name="email"
                 type="email"
                 value={this.state.email}
@@ -184,13 +189,16 @@ class Form extends Component {
             {/* gender */}
             <div className="form-gender form-item">
               <label className="form-label">
-                Gender<span className="form-asterisk">*</span>
-                <select className="form-field"
+                Gender<span className="form-asterisk">  *</span>
+                <select
+                  className="form-field"
                   name="gender"
                   value={this.state.value}
                   onChange={this.handleChange}
                   required
                 >
+                  <option>Choose your gender</option>
+
                   <option>Female</option>
                   <option>Male</option>
                 </select>
@@ -202,14 +210,15 @@ class Form extends Component {
             {/* address */}
             <div className="form-address form-item">
               <label className="form-label">
-                Address<span className="form-asterisk">*</span>
+                Address<span className="form-asterisk">  *</span>
               </label>
-              <input className="form-field"
+              <input
+                className="form-field"
                 name="address"
                 type="text"
                 value={this.state.address}
                 onChange={this.handleChange}
-                placeholder="streetname"
+                placeholder="Streetname"
                 required
               />
               <div className="form-message-error">
@@ -219,12 +228,13 @@ class Form extends Component {
               {/* house number */}
               <div className="block-number-zipcode">
                 <div className="form-housNumber">
-                  <input className="form-field"
+                  <input
+                    className="form-field"
                     name="houseNumber"
                     type="text"
                     value={this.state.houseNumber}
                     onChange={this.handleChange}
-                    placeholder="house number"
+                    placeholder="House number"
                     required
                   />
                   <div className="form-message-error">
@@ -234,12 +244,13 @@ class Form extends Component {
 
                 {/* zipcode */}
                 <div className="form-zipecode">
-                  <input className="form-field"
+                  <input
+                    className="form-field"
                     name="zipcode"
                     type="text"
                     value={this.state.zipcode}
                     onChange={this.handleChange}
-                    placeholder="zipcode"
+                    placeholder="Zipcode"
                     required
                   />
                   <div className="form-message-error">
@@ -249,9 +260,10 @@ class Form extends Component {
               </div>
             </div>
             {/* file */}
-            <label className='form-label'/>
+            <label className="form-label" />
             <div className="form-file form-item">
-              <input className="form-field"
+              <input
+                className="form-field"
                 name="file"
                 type="file"
                 accept=".doc, .docx, .pdf, .rtf, .txt"
@@ -261,7 +273,8 @@ class Form extends Component {
             {/* motivational letter */}
             <div className="form-letter form-item">
               <label className="form-label">Motivational Letter</label>
-              <textarea className="form-field-text"
+              <textarea
+                className="form-field-text"
                 name="letter"
                 type="text"
                 value={this.state.letter}
@@ -270,11 +283,13 @@ class Form extends Component {
               />
             </div>
             {/* submit */}
-            <div className="form-item">
-              <button type="button" onClick={this.handleSubmit}>
+              <button
+                className="form-item form-submit-button"
+                type="button"
+                onClick={this.handleSubmit}
+              >
                 Submit
               </button>
-            </div>
           </form>
         </div>
       </div>
