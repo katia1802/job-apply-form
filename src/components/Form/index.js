@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
 const formValid = formErrros => {
   let valid = true;
@@ -14,8 +14,8 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: new Date(),
       fullName: "",
+      birthDate: "",
       email: "",
       gender: "",
       address: "",
@@ -26,6 +26,7 @@ class Form extends Component {
       submitting: false,
       formErrors: {
         fullName: "",
+        birthDate: "",
         email: "",
         gender: "",
         address: "",
@@ -38,12 +39,12 @@ class Form extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     // this.handleName = this.handleName.bind(this);
-    this.handleDate = this.handleDate.bind(this);
+    // this.handleDate = this.handleDate.bind(this);
     // this.handleEmail = this.handleEmail.bind(this);
     // this.handleAddress = this.handleAddress.bind(this);
-    this.handleHouseNumber = this.handleHouseNumber.bind(this);
-    this.handleZipcode = this.handleZipcode.bind(this);
-    this.handleLetter = this.handleLetter.bind(this);
+    // this.handleHouseNumber = this.handleHouseNumber.bind(this);
+    // this.handleZipcode = this.handleZipcode.bind(this);
+    // this.handleLetter = this.handleLetter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -51,36 +52,57 @@ class Form extends Component {
     e.preventDefault();
     const { name, value } = e.target;
     let formErrors = this.state.formErrors;
-    console.log('name: ', name)
-    console.log ("value : ", value)
+    console.log("name: ", name);
+    console.log("value : ", value);
 
     switch (name) {
-        case "fullName":
+      case "fullName":
         formErrors.fullName =
           value.length < 3 && value.length > 0
             ? "minimum 3 characters required"
             : "";
         break;
-      
-        case "email":
+
+      case "birthDate":
+        formErrors.birthDate = RegExp(
+          /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
+        ).test(value)
+          ? ""
+          : "enter DD/MM/YYYY birthdate format";
+        break;
+
+      case "email":
         formErrors.email =
-        RegExp(
-          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-        ).test(value) && value.length > 0
+          RegExp(
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+          ).test(value) && value.length > 0
             ? ""
             : "invalid email address";
         break;
-        
-        case "gender":
-        formErrors.gender=
-        RegExp(/^male$||^female$/).test(value)?
-        "": "please choose a gender";
+
+      case "gender":
+        formErrors.gender =
+          RegExp(/^male$||^female$/).test(value) && value.length > 0
+            ? ""
+            : "please choose a gender";
         break;
 
-        case "address":
-        formErrors.address=
-        RegExp(/^\d+\s[A-z]+\s[A-z]+/).test(value) && value.length >0?
-        "": "please fill your address";
+      case "address":
+        formErrors.address =
+          value.length < 2 && value.length > 0 ? "street name required" : "";
+        break;
+
+      case "houseNumber":
+        formErrors.houseNumber =
+          RegExp(/^[0-9]*$/).test(value) && value.length > 0
+            ? ""
+            : "numeric characters required";
+        break;
+
+      case "zipcode":
+        formErrors.zipcode = RegExp(/^([0-9]{4}[ ]+[a-zA-Z]{2})$/).test(value)
+          ? ""
+          : "please enter a valid dutch zipcode";
         break;
 
       default:
@@ -99,11 +121,11 @@ class Form extends Component {
   //     fullName: e.target.value
   //   });
 
-  handleDate(date) {
-    this.setState({
-      startDate: date
-    });
-  }
+  // handleDate(date) {
+  //   this.setState({
+  //     birthDate: date
+  //   });
+  // }
 
   // handleEmail(e) {
   //   this.setState({
@@ -117,28 +139,28 @@ class Form extends Component {
   //   });
   // }
 
-  handleHouseNumber(e) {
-    this.setState({
-      houseNumber: e.target.value
-    });
-  }
-  handleZipcode(e) {
-    this.setState({
-      zipcode: e.target.value
-    });
-  }
+  // handleHouseNumber(e) {
+  //   this.setState({
+  //     houseNumber: e.target.value
+  //   });
+  // }
+  // handleZipcode(e) {
+  //   this.setState({
+  //     zipcode: e.target.value
+  //   });
+  // }
 
-  handleSelectedFile(e) {
-    this.setState({
-      file: e.target.files[0]
-    });
-  }
+  // handleSelectedFile(e) {
+  //   this.setState({
+  //     file: e.target.files[0]
+  //   });
+  // }
 
-  handleLetter(e) {
-    this.setState({
-      letter: e.target.value
-    });
-  }
+  // handleLetter(e) {
+  //   this.setState({
+  //     letter: e.target.value
+  //   });
+  // }
   handleSubmit(e) {
     e.preventDefault();
 
@@ -170,21 +192,25 @@ class Form extends Component {
               placeholder="Katia Rojas Sandoval"
               required
             />
+            <div className="form-message-error">
+              {this.state.formErrors.fullName}
+            </div>
           </div>
           {/* birthdate */}
           <div className="form-birthdate">
             <label>
               Date of Birth<span className="form-asterisk">*</span>
             </label>
-            <div>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.handleDate}
-                showYearDropdown
-                dateFormatCalendar="MMMM"
-                scrollableYearDropdown
-                yearDropdownItemNumber={15}
-              />
+            <input
+              type="text"
+              name="birthDate"
+              value={this.state.birthDate}
+              onChange={this.handleChange}
+              placeholder="DD/MM/YYYY"
+              required
+            />
+            <div className="form-message-error">
+              {this.state.formErrors.birthDate}
             </div>
           </div>
           {/* email */}
@@ -200,6 +226,9 @@ class Form extends Component {
               placeholder="hola@endouble.com"
               required
             />
+            <div className="form-message-error">
+              {this.state.formErrors.email}
+            </div>
           </div>
           {/* gender */}
           <div className="form-gender">
@@ -214,10 +243,13 @@ class Form extends Component {
                 <option>Female</option>
                 <option>Male</option>
               </select>
+              <div className="form-message-error">
+                {this.state.formErrors.gender}
+              </div>
             </label>
           </div>
           {/* address */}
-          <div>
+          <div className="form-address">
             <label>
               Address<span className="form-asterisk">*</span>
             </label>
@@ -229,26 +261,35 @@ class Form extends Component {
               placeholder="streetname"
               required
             />
+            <div className="form-message-error">
+              {this.state.formErrors.address}
+            </div>
+
             {/* house number */}
             <input
-              name="house number"
+              name="houseNumber"
               type="text"
               value={this.state.houseNumber}
-              onChange={this.handleHouseNumber}
-              pattern="[0-9]*"
+              onChange={this.handleChange}
               placeholder="house number"
               required
             />
+            <div className="form-message-error">
+              {this.state.formErrors.houseNumber}
+            </div>
+
             {/* zipcode */}
             <input
               name="zipcode"
               type="text"
               value={this.state.zipcode}
-              onChange={this.handleZipcode}
+              onChange={this.handleChange}
               placeholder="zipcode"
               required
-              pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}"
             />
+            <div className="form-message-error">
+              {this.state.formErrors.zipcode}
+            </div>
           </div>
           {/* file */}
           <div>
@@ -256,7 +297,7 @@ class Form extends Component {
               name="file"
               type="file"
               accept=".doc, .docx, .pdf, .rtf, .txt"
-              onChange={this.handleSelectedFile}
+              onChange={this.handleChange}
             />
           </div>
           {/* motivational letter */}
@@ -266,7 +307,7 @@ class Form extends Component {
               name="letter"
               type="text"
               value={this.state.letter}
-              onChange={this.handleLetter}
+              onChange={this.handleChange}
               placeholder="Let the company know more about you!"
             />
           </div>
