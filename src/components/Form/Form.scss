@@ -6,15 +6,15 @@
 }
 
 .wrapper-padding {
-    margin: 170px 10px 60px;
-    
+    margin: 170px 20px 60px;
 }
 
-.form-wrapper{
+.form-wrapper {
     margin: 60px auto;
     display: flex;
     flex-direction: column;
 }
+
 .form-message-error {
     color: red;
     margin-left: 0.5rem
@@ -37,11 +37,10 @@
 }
 
 .form-item {
-    width: 90%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     margin: 27px auto;
-    padding: 0px;
 }
 
 .form-subtext {
@@ -76,9 +75,9 @@
     font-size: $fontSmall;
 }
 
-.block-number-zipcode{
+.block-number-zipcode {
     display: flex;
-
+    width: 100%;
 }
 
 .form-field-text {
@@ -96,6 +95,7 @@
     align-items: center;
     justify-content: center;
     height: 45px;
+    width: 100%;
     margin-top: 30px;
     color: $darkGrey;
     font-size: 18px;
@@ -107,13 +107,34 @@
 }
 
 .form-submit-button a:hover,
-.form-submit-button a:active{
+.form-submit-button a:active {
     color: rgb(155, 215, 235);
     border: white;
-  
 }
 
-
-.form-field-file{
+.form-field-file {
     font-family: $fontText;
+}
+
+@media all and (min-width:500px) {
+    .block-birthdate-gender {
+        display: flex;
+        justify-content: space-between;
+    }
+    .form-wrapper {
+        width: 500px;
+    }
+    .form-birthdate{
+        margin: 0px;
+    }
+
+    .form-gender{
+        margin: 0px;
+    }
+    .form-submit-button {
+        width: 200px;
+        margin: 0px;
+        display: flex;
+        align-self: flex-end;
+    }
 }

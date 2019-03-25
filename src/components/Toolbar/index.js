@@ -11,6 +11,7 @@ class Toolbar extends Component {
           <ToggleSideButton click={drawerClickHandler} />
         </div>
         <div className="toolbar__logo">Logo</div>
+
         <div className="spacer" />
         <ul className="toolbar__navigation-items">
           <li className="toolbar__navigation-item">

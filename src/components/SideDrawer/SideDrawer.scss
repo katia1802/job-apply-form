@@ -1,3 +1,5 @@
+@import '../../assets/core/setting';
+
 .side-drawer {
     height: 100%;
     background-color: white;
@@ -12,22 +14,26 @@
     width: 50%;
     max-width: 200px;
     transform: translateX(-100%);// con esto se oculta
-    transition: transform 0.3s ease-out
+    transition: transform 0.3s ease-out;
 }
 
 .side-drawer a:hover,
 .side-drawer a:active{
-    color: #fa923f
+    color: $darkGreen;
 }
 
 .sideDrawer__navigation-items{
+    margin: 75px auto;
     list-style: none;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 50px 50px 50px 50px;
+    justify-content: center;
+    text-align: center;
+    font-size: $fontSmall;
 }
 
 .sideDrawer__navigation-itemlink{
-    color: purple;
+    color: $darkGrey;
     text-decoration: none;
 }
 

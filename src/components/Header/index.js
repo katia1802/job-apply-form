@@ -18,6 +18,7 @@ class Header extends Component {
     this.setState(prevState => {
       return { sideDrawerOpen: !prevState.sideDrawerOpen };
     });
+
   }
 
   backdropClickHandler() {

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Form.scss";
+// import DatePicker from "react-datepicker";
+// import 'react-datepicker/dist/react-datepicker.css';
 
 class Form extends Component {
   constructor(props) {
@@ -127,7 +129,8 @@ class Form extends Component {
           In order to apply, please fill the following form.
         </p>
         <p className="form-subtext">
-          All fields with <span className="form-asterisk">  *</span> are required.
+          All fields with <span className="form-asterisk"> *</span> are
+          required.
         </p>
 
         <div className="form-wrapper">
@@ -135,7 +138,7 @@ class Form extends Component {
             {/* name */}
             <div className="form-name form-item">
               <label className="form-label">
-                First and Last Name<span className="form-asterisk">  *</span>
+                First and Last Name<span className="form-asterisk"> *</span>
               </label>
               <input
                 className="form-field"
@@ -150,28 +153,10 @@ class Form extends Component {
                 {this.state.formErrors.fullName}
               </div>
             </div>
-            {/* birthdate */}
-            <div className="form-birthdate form-item">
-              <label className="form-label">
-                Date of Birth<span className="form-asterisk">  *</span>
-              </label>
-              <input
-                className="form-field"
-                type="text"
-                name="birthDate"
-                value={this.state.birthDate}
-                onChange={this.handleChange}
-                placeholder="dd/mm/yyyy"
-                required
-              />
-              <div className="form-message-error">
-                {this.state.formErrors.birthDate}
-              </div>
-            </div>
             {/* email */}
             <div className="form-email form-item">
               <label className="form-label">
-                Email Address<span className="form-asterisk">  *</span>
+                Email Address<span className="form-asterisk"> *</span>
               </label>
               <input
                 className="form-field"
@@ -186,31 +171,61 @@ class Form extends Component {
                 {this.state.formErrors.email}
               </div>
             </div>
-            {/* gender */}
-            <div className="form-gender form-item">
-              <label className="form-label">
-                Gender<span className="form-asterisk">  *</span>
-                <select
-                  className="form-field"
-                  name="gender"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  required
-                >
-                  <option>Choose your gender</option>
+            {/* birthdate */}
+            <div className="block-birthdate-gender">
+              <div className="form-birthdate form-item">
+                <label className="form-label">
+                  Date of Birth<span className="form-asterisk"> *</span>
+                </label>
 
-                  <option>Female</option>
-                  <option>Male</option>
-                </select>
+                {/* <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleChange}
+            showYearDropdown
+            dateFormatCalendar="MMMM"
+            scrollableYearDropdown
+            yearDropdownItemNumber={15}
+        /> */}
+
+                <input
+                  className="form-field"
+                  type="text"
+                  name="birthDate"
+                  value={this.state.birthDate}
+                  onChange={this.handleChange}
+                  placeholder="dd/mm/yyyy"
+                  required
+                />
                 <div className="form-message-error">
-                  {this.state.formErrors.gender}
+                  {this.state.formErrors.birthDate}
                 </div>
-              </label>
+              </div>
+
+              {/* gender */}
+              <div className="form-gender form-item">
+                <label className="form-label">
+                  Gender<span className="form-asterisk"> *</span>                </label>
+
+                  <select
+                    className="form-field"
+                    name="gender"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    required
+                  >
+                    <option>Choose your gender</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                  </select>
+                  <div className="form-message-error">
+                    {this.state.formErrors.gender}
+                  </div>
+              </div>
             </div>
             {/* address */}
             <div className="form-address form-item">
               <label className="form-label">
-                Address<span className="form-asterisk">  *</span>
+                Address<span className="form-asterisk"> *</span>
               </label>
               <input
                 className="form-field"
@@ -283,13 +298,15 @@ class Form extends Component {
               />
             </div>
             {/* submit */}
-              <button
-                className="form-item form-submit-button"
-                type="button"
-                onClick={this.handleSubmit}
-              >
-                Submit
-              </button>
+            <div className="form-submit form-item">
+            <button
+              className="form-item form-submit-button"
+              type="button"
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </button>
+            </div>
           </form>
         </div>
       </div>
