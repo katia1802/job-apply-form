@@ -37,13 +37,24 @@
     .footer-wrapper {
         display: flex;
         justify-content: space-around;
-        width:100%;
-        
+        width: 100%;
     }
     .footer-nav {
         display: flex;
     }
-    .footer-nav-item{
+    .footer-nav-item {
         padding-right: 2px;
+    }
+}
+
+@media all and (min-width: 1000px) {
+    .footer-wrapper {
+        font-size: $fontMedium;
+    }
+}
+
+@media all and (min-width: 1400px) {
+    .footer-wrapper {
+        font-size: 28px;
     }
 }

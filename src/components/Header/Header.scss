@@ -21,7 +21,32 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 400px;
+    height: 350px;
     width: 100%;  
 }
+
+@media all and (min-width: 500px) {
+    .cover{
+        height: 500px;
+    }
+}  
+
+@media all and (min-width: 1000px) {
+    .cover{
+        height: 666px;
+    }
+    .header{
+        height: 70px;
+    }
+}  
+
+@media all and (min-width: 1400px) {
+    .cover{
+        height: 900px;
+    }
+    .header{
+        height: 100px;
+    }
+
+}  
 

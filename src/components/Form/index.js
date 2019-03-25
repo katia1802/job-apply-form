@@ -289,7 +289,7 @@ class Form extends Component {
             <div className="form-letter form-item">
               <label className="form-label">Motivational Letter</label>
               <textarea
-                className="form-field-text"
+                className="form-field-text form-item"
                 name="letter"
                 type="text"
                 value={this.state.letter}
