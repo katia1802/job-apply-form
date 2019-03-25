@@ -18,19 +18,32 @@
 .footer-nav {
     list-style-type: none;
     margin-top: 20px;
-
 }
 
 .footer-nav-item {
     padding: 8px
-
 }
 
-.fab{
+.fab {
     padding-right: 8px;
 }
 
-.footer--link {
+.footer-link {
     color: $mediumGrey;
     text-decoration: none;
+}
+
+@media all and (min-width: 500px) {
+    .footer-wrapper {
+        display: flex;
+        justify-content: space-around;
+        width:100%;
+        
+    }
+    .footer-nav {
+        display: flex;
+    }
+    .footer-nav-item{
+        padding-right: 2px;
+    }
 }

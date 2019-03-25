@@ -43,11 +43,19 @@
 }
 
 @media all and (min-width: 500px) {
-  .toolbar__navigation-items {
-    display: grid;
-    grid-template-columns: repeat(4, 30%);
-    grid-gap: 8px; //si la pantalla se pone bailonga toquetear el gap
+  .toolbar__navigation{
+    display:flex;
+    justify-content: space-between;
   }
+  .toolbar__navigation-items {
+    display: flex;
+
+  }
+  .toolbar__navigation-item {
+    display: flex;
+    margin: 12px;
+  }
+
   .toolbar__toogle-button {
     display: none;
   }

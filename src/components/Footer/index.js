@@ -11,7 +11,7 @@ class Footer extends Component {
             <ul className="footer-nav">
               <li className="footer-nav-item">
                 <a
-                  className="footer--link"
+                  className="footer-link"
                   href="https://github.com/katia1802"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -22,7 +22,7 @@ class Footer extends Component {
               </li>
               <li className="footer-nav-item">
                 <a
-                  className="footer--link"
+                  className="footer-link"
                   href="https://www.linkedin.com/in/katiarojassandoval/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -33,7 +33,7 @@ class Footer extends Component {
               </li>
               <li className="footer-nav-item">
                 <a
-                  className="footer--link"
+                  className="footer-link"
                   href="https://twitter.com/kat_srs"
                   target="_blank"
                   rel="noopener noreferrer"
