@@ -121,13 +121,13 @@ class Form extends Component {
 
   render() {
     return (
-      <div className="form-padding">
+      <div className="wrapper-padding">
         <h1 className="form-title">Job Application</h1>
         <p className="form-text">
           In order to apply, please fill the following form.
         </p>
         <p className="form-subtext">
-          All areas with <span className="form-asterisk">  *</span> required
+          All fields with <span className="form-asterisk">  *</span> are required.
         </p>
 
         <div className="form-wrapper">

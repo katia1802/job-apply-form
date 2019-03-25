@@ -5,17 +5,16 @@
     padding: 0;
 }
 
-.form-padding {
-    margin-top: 190px;
+.wrapper-padding {
+    margin: 170px 10px 60px;
+    
 }
 
-// .form-wrapper{
-//     display: flex;
-//     flex-direction: row;
-// }
-// .block-number-zipcode{
-//     display: block;
-// }
+.form-wrapper{
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+}
 .form-message-error {
     color: red;
     margin-left: 0.5rem
@@ -34,7 +33,7 @@
     font-size: $fontSmall;
     color: $darkGrey;
     text-align: center;
-    margin: 18px auto;
+    margin: 20px auto;
 }
 
 .form-item {
@@ -47,7 +46,7 @@
 
 .form-subtext {
     font-family: $fontText;
-    font-size: $fontSuperSmall;
+    font-size: 13px;
     color: $darkGrey;
     text-align: center;
     margin-top: 15px;
@@ -74,7 +73,12 @@
     width: 100%;
     border-radius: 5px;
     font-family: $fontText;
-    font-size: $fontSmall
+    font-size: $fontSmall;
+}
+
+.block-number-zipcode{
+    display: flex;
+
 }
 
 .form-field-text {
@@ -94,9 +98,22 @@
     height: 45px;
     margin-top: 30px;
     color: $darkGrey;
-    background: $lightGreen;
+    font-size: 18px;
+    background: $mediumGreen;
     font-family: $fontText;
     border-radius: 8px;
     border: none;
     cursor: pointer;
+}
+
+.form-submit-button a:hover,
+.form-submit-button a:active{
+    color: rgb(155, 215, 235);
+    border: white;
+  
+}
+
+
+.form-field-file{
+    font-family: $fontText;
 }
