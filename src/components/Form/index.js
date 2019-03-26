@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Form.scss";
+import Swal from "sweetalert2";
 
 class Form extends Component {
   constructor(props) {
@@ -25,8 +26,10 @@ class Form extends Component {
         zipcode: "",
         file: "ok",
         letter: "ok"
-      }
+      },
+      isModalOpen: false
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -41,16 +44,14 @@ class Form extends Component {
     switch (name) {
       case "fullName":
         formErrors.fullName =
-          value.length < 3 && value.length > 0
-            ? "Minimum 3 characters required"
-            : "";
+          value.length < 3 ? "Minimum 3 characters required" : "Perfect!";
         break;
 
       case "birthDate":
         formErrors.birthDate = RegExp(
           /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
         ).test(value)
-          ? ""
+          ? "Perfect!"
           : "Enter DD/MM/YYYY birthdate format";
         break;
 
@@ -59,32 +60,34 @@ class Form extends Component {
           RegExp(
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
           ).test(value) && value.length > 0
-            ? ""
+            ? "Perfect!"
             : "Invalid email address";
         break;
 
       case "gender":
         formErrors.gender =
           RegExp(/^male$||^female$/).test(value) && value.length > 0
-            ? ""
+            ? "Perfect!"
             : "Please choose a gender";
         break;
 
       case "address":
         formErrors.address =
-          value.length < 2 && value.length > 0 ? "street name required" : "";
+          value.length < 2 && value.length > 0
+            ? "street name required"
+            : "Perfect!";
         break;
 
       case "houseNumber":
         formErrors.houseNumber =
           RegExp(/^[0-9]*$/).test(value) && value.length > 0
-            ? ""
+            ? "Perfect!"
             : "Numeric characters required";
         break;
 
       case "zipcode":
         formErrors.zipcode = RegExp(/^([0-9]{4}[ ]+[a-zA-Z]{2})$/).test(value)
-          ? ""
+          ? "Perfect!"
           : "Please enter a valid dutch zipcode";
         break;
 
@@ -96,27 +99,34 @@ class Form extends Component {
         formErrors,
         [name]: value
       },
-      () => console.log(this.state)
+      () => console.log()
     );
   }
 
   handleSubmit(e) {
     e.preventDefault();
     if (
-      this.state.formErrors.fullName === "ok" &&
-      this.state.formErrors.birthDate === "ok" &&
-      this.state.formErrors.email === "ok" &&
-      this.state.formErrors.gender === "ok" &&
-      this.state.formErrors.address === "ok" &&
-      this.state.formErrors.houseNumber === "ok" &&
-      this.state.formErrors.zipcode === "ok" &&
+      this.state.formErrors.fullName === "Perfect!" &&
+      this.state.formErrors.birthDate === "Perfect!" &&
+      this.state.formErrors.email === "Perfect!" &&
+      this.state.formErrors.gender === "Perfect!" &&
+      this.state.formErrors.address === "Perfect!" &&
+      this.state.formErrors.houseNumber === "Perfect!" &&
+      this.state.formErrors.zipcode === "Perfect!" &&
       this.state.formErrors.file === "ok" &&
       this.state.formErrors.letter === "ok"
     ) {
-      alert("Thanks for submitting");
-    } else {
-      alert( 'no valid form'
+      Swal.fire(
+        "Thanks for submitting!",
+        "We will contact you soon!",
+        "success"
       );
+    } else {
+      Swal.fire({
+        type: "error",
+        title: "Oops...",
+        text: "Something went wrong!"
+      });
     }
   }
   render() {
@@ -151,7 +161,7 @@ class Form extends Component {
                 placeholder="Katia Rojas Sandoval"
                 required
               />
-              <div className="form-message-error">
+              <div className="form-message">
                 {this.state.formErrors.fullName}
               </div>
             </div>
@@ -169,9 +179,7 @@ class Form extends Component {
                 placeholder="hola@endouble.com"
                 required
               />
-              <div className="form-message-error">
-                {this.state.formErrors.email}
-              </div>
+              <div className="form-message">{this.state.formErrors.email}</div>
             </div>
             {/* birthdate */}
             <div className="block-birthdate-gender">
@@ -179,16 +187,6 @@ class Form extends Component {
                 <label className="form-label">
                   Date of Birth<span className="form-asterisk"> *</span>
                 </label>
-
-                {/* <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleChange}
-            showYearDropdown
-            dateFormatCalendar="MMMM"
-            scrollableYearDropdown
-            yearDropdownItemNumber={15}
-        /> */}
-
                 <input
                   className="form-field"
                   type="text"
@@ -198,7 +196,7 @@ class Form extends Component {
                   placeholder="dd/mm/yyyy"
                   required
                 />
-                <div className="form-message-error">
+                <div className="form-message">
                   {this.state.formErrors.birthDate}
                 </div>
               </div>
@@ -220,7 +218,7 @@ class Form extends Component {
                   <option>Female</option>
                   <option>Male</option>
                 </select>
-                <div className="form-message-error">
+                <div className="form-message">
                   {this.state.formErrors.gender}
                 </div>
               </div>
@@ -239,7 +237,7 @@ class Form extends Component {
                 placeholder="Streetname"
                 required
               />
-              <div className="form-message-error">
+              <div className="form-message">
                 {this.state.formErrors.address}
               </div>
 
@@ -255,7 +253,7 @@ class Form extends Component {
                     placeholder="House number"
                     required
                   />
-                  <div className="form-message-error">
+                  <div className="form-message">
                     {this.state.formErrors.houseNumber}
                   </div>
                 </div>
@@ -271,7 +269,7 @@ class Form extends Component {
                     placeholder="Zipcode"
                     required
                   />
-                  <div className="form-message-error">
+                  <div className="form-message">
                     {this.state.formErrors.zipcode}
                   </div>
                 </div>
