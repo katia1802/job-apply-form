@@ -206,7 +206,6 @@ class Form extends Component {
                   dropdownMode="select"
                   placeholder="dd/mm/yyyy"
                   required
-
                 />
                 {/* <input
                   className="form-field"
