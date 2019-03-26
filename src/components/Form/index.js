@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import "./Form.scss";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fullName: "",
-      birthDate: "",
+      birthDate: new Date(),
       email: "",
       gender: "",
       address: "",
@@ -32,14 +34,21 @@ class Form extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDate = this.handleDate.bind(this);
+  }
+
+  handleDate(date) {
+    this.setState({
+      birthDate: date
+    });
   }
 
   handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
     let formErrors = this.state.formErrors;
-    // console.log("name: ", name);
-    // console.log("value : ", value);
+    console.log("name: ", name);
+    console.log("value : ", value);
 
     switch (name) {
       case "fullName":
@@ -49,7 +58,8 @@ class Form extends Component {
 
       case "birthDate":
         formErrors.birthDate = RegExp(
-          /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
+          /^(((((((0?[13578])|(1[02]))[\.\-/]?((0?[1-9])|([12]\d)|(3[01])))|(((0?[469])|(11))[\.\-/]?((0?[1-9])|([12]\d)|(30)))|((0?2)[\.\-/]?((0?[1-9])|(1\d)|(2[0-8]))))[\.\-/]?((\d{2})?([\d][\d]))))|((0?2)[\.\-/]?(29)[\.\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$/
+          // /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
         ).test(value)
           ? "Perfect!"
           : "Enter DD/MM/YYYY birthdate format";
@@ -104,10 +114,11 @@ class Form extends Component {
   }
 
   handleSubmit(e) {
+    console.log(this.state.formErrors);
     e.preventDefault();
     if (
       this.state.formErrors.fullName === "Perfect!" &&
-      this.state.formErrors.birthDate === "Perfect!" &&
+      this.state.formErrors.birthDate === "" &&
       this.state.formErrors.email === "Perfect!" &&
       this.state.formErrors.gender === "Perfect!" &&
       this.state.formErrors.address === "Perfect!" &&
@@ -130,7 +141,6 @@ class Form extends Component {
     }
   }
   render() {
-
     return (
       <div className="wrapper-padding">
         <h1 className="form-title">Job Application</h1>
@@ -143,10 +153,7 @@ class Form extends Component {
         </p>
 
         <div className="form-wrapper">
-          <form 
-          onSubmit={this.handleSubmit} 
-          className="form" 
-          noValidate>
+          <form onSubmit={this.handleSubmit} className="form" noValidate>
             {/* name */}
             <div className="form-name form-item">
               <label className="form-label">
@@ -187,15 +194,27 @@ class Form extends Component {
                 <label className="form-label">
                   Date of Birth<span className="form-asterisk"> *</span>
                 </label>
-                <input
+                <DatePicker
                   className="form-field"
-                  type="text"
                   name="birthDate"
+                  selected={this.state.birthDate}
+                  onChange={this.handleDate}
                   value={this.state.birthDate}
-                  onChange={this.handleChange}
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
                   placeholder="dd/mm/yyyy"
                   required
+
                 />
+                {/* <input
+                  className="form-field"
+                  name="birthDate"
+                  value={this.state.birthDate}
+                  placeholder="dd/mm/yyyy"
+                  required
+                /> */}
                 <div className="form-message">
                   {this.state.formErrors.birthDate}
                 </div>
