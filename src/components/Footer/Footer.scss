@@ -49,12 +49,15 @@
 
 @media all and (min-width: 1000px) {
     .footer-wrapper {
+        margin-top: 25px; 
         font-size: $fontMedium;
     }
 }
 
 @media all and (min-width: 1400px) {
     .footer-wrapper {
-        font-size: 28px;
+        margin-top: 35px; 
+
+        font-size: 23px;
     }
 }

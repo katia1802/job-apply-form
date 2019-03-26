@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./Form.scss";
-// import DatePicker from "react-datepicker";
-// import 'react-datepicker/dist/react-datepicker.css';
 
 class Form extends Component {
   constructor(props) {
@@ -37,8 +35,8 @@ class Form extends Component {
     e.preventDefault();
     const { name, value } = e.target;
     let formErrors = this.state.formErrors;
-    console.log("name: ", name);
-    console.log("value : ", value);
+    // console.log("name: ", name);
+    // console.log("value : ", value);
 
     switch (name) {
       case "fullName":
@@ -105,23 +103,24 @@ class Form extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (
-      this.state.formErrors.fullName === "" &&
-      this.state.formErrors.birthDate === "" &&
-      this.state.formErrors.email === "" &&
-      this.state.formErrors.gender === "" &&
-      this.state.formErrors.address === "" &&
-      this.state.formErrors.houseNumber === "" &&
-      this.state.formErrors.zipcode === "" &&
-      this.state.formErrors.file === "" &&
-      this.state.formErrors.letter === ""
+      this.state.formErrors.fullName === "ok" &&
+      this.state.formErrors.birthDate === "ok" &&
+      this.state.formErrors.email === "ok" &&
+      this.state.formErrors.gender === "ok" &&
+      this.state.formErrors.address === "ok" &&
+      this.state.formErrors.houseNumber === "ok" &&
+      this.state.formErrors.zipcode === "ok" &&
+      this.state.formErrors.file === "ok" &&
+      this.state.formErrors.letter === "ok"
     ) {
       alert("Thanks for submitting");
     } else {
-      alert("no validado");
+      alert( 'no valid form'
+      );
     }
   }
-
   render() {
+
     return (
       <div className="wrapper-padding">
         <h1 className="form-title">Job Application</h1>
@@ -134,7 +133,10 @@ class Form extends Component {
         </p>
 
         <div className="form-wrapper">
-          <form onSubmit={this.handleSubmit} className="form" noValidate>
+          <form 
+          onSubmit={this.handleSubmit} 
+          className="form" 
+          noValidate>
             {/* name */}
             <div className="form-name form-item">
               <label className="form-label">
@@ -204,22 +206,23 @@ class Form extends Component {
               {/* gender */}
               <div className="form-gender form-item">
                 <label className="form-label">
-                  Gender<span className="form-asterisk"> *</span>                </label>
+                  Gender<span className="form-asterisk"> *</span>
+                </label>
 
-                  <select
-                    className="form-field"
-                    name="gender"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    required
-                  >
-                    <option>Choose your gender</option>
-                    <option>Female</option>
-                    <option>Male</option>
-                  </select>
-                  <div className="form-message-error">
-                    {this.state.formErrors.gender}
-                  </div>
+                <select
+                  className="form-field"
+                  name="gender"
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  required
+                >
+                  <option>Choose your gender</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                </select>
+                <div className="form-message-error">
+                  {this.state.formErrors.gender}
+                </div>
               </div>
             </div>
             {/* address */}
@@ -299,13 +302,13 @@ class Form extends Component {
             </div>
             {/* submit */}
             <div className="form-submit form-item">
-            <button
-              className="form-item form-submit-button"
-              type="button"
-              onClick={this.handleSubmit}
-            >
-              Submit
-            </button>
+              <button
+                className="form-item form-submit-button"
+                type="button"
+                onClick={this.handleSubmit}
+              >
+                Submit
+              </button>
             </div>
           </form>
         </div>

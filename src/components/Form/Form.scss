@@ -6,7 +6,7 @@
 }
 
 .wrapper-padding {
-    margin: 160px 20px 60px;
+    margin: 140px 20px 60px;
 }
 
 .form-wrapper {
@@ -128,7 +128,7 @@
         width: 500px;
     }
     .form-title {
-        font-weight: 600;
+        font-weight: 500;
     }
     .form-birthdate {
         margin: 0px;
@@ -165,6 +165,7 @@
     .form-asterisk {
         font-size: $fontSmall;
     }
+
     .form-label {
         font-size: $fontMedium;
     }
@@ -185,10 +186,18 @@
     }
     .form-birthdate {
         margin: 0px;
+        padding: 0;
     }
     .form-gender {
         margin: 0px;
+        padding: 0;
     }
+    .block-number-zipcode {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
     .form-submit-button {
         font-size: $fontMedium;
         width: 300px;
