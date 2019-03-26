@@ -1,146 +1,10 @@
 import React, { Component } from "react";
 import "./Form.scss";
-import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fullName: "",
-      birthDate: new Date(),
-      email: "",
-      gender: "",
-      address: "",
-      houseNumber: "",
-      zipcode: "",
-      file: new FileReader(),
-      letter: "",
-      submitting: true,
-      formErrors: {
-        fullName: "",
-        birthDate: "",
-        email: "",
-        gender: "",
-        address: "",
-        houseNumber: "",
-        zipcode: "",
-        file: "ok",
-        letter: "ok"
-      },
-      isModalOpen: false
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDate = this.handleDate.bind(this);
-  }
-
-  handleDate(date) {
-    this.setState({
-      birthDate: date
-    });
-  }
-
-  handleChange(e) {
-    e.preventDefault();
-    const { name, value } = e.target;
-    let formErrors = this.state.formErrors;
-    console.log("name: ", name);
-    console.log("value : ", value);
-
-    switch (name) {
-      case "fullName":
-        formErrors.fullName =
-          value.length < 3 ? "Minimum 3 characters required" : "Perfect!";
-        break;
-
-      case "birthDate":
-        formErrors.birthDate = RegExp(
-          /^(((((((0?[13578])|(1[02]))[\.\-/]?((0?[1-9])|([12]\d)|(3[01])))|(((0?[469])|(11))[\.\-/]?((0?[1-9])|([12]\d)|(30)))|((0?2)[\.\-/]?((0?[1-9])|(1\d)|(2[0-8]))))[\.\-/]?((\d{2})?([\d][\d]))))|((0?2)[\.\-/]?(29)[\.\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$/
-          // /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/
-        ).test(value)
-          ? "Perfect!"
-          : "Enter DD/MM/YYYY birthdate format";
-        break;
-
-      case "email":
-        formErrors.email =
-          RegExp(
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-          ).test(value) && value.length > 0
-            ? "Perfect!"
-            : "Invalid email address";
-        break;
-
-      case "gender":
-        formErrors.gender =
-          RegExp(/^male$||^female$/).test(value) && value.length > 0
-            ? "Perfect!"
-            : "Please choose a gender";
-        break;
-
-      case "address":
-        formErrors.address =
-          value.length < 2 && value.length > 0
-            ? "street name required"
-            : "Perfect!";
-        break;
-
-      case "houseNumber":
-        formErrors.houseNumber =
-          RegExp(/^[0-9]*$/).test(value) && value.length > 0
-            ? "Perfect!"
-            : "Numeric characters required";
-        break;
-
-      case "zipcode":
-        formErrors.zipcode = RegExp(/^([0-9]{4}[ ]+[a-zA-Z]{2})$/).test(value)
-          ? "Perfect!"
-          : "Please enter a valid dutch zipcode";
-        break;
-
-      default:
-        break;
-    }
-    this.setState(
-      {
-        formErrors,
-        [name]: value
-      },
-      () => console.log()
-    );
-  }
-
-  handleSubmit(e) {
-    console.log(this.state.formErrors);
-    e.preventDefault();
-    if (
-      this.state.formErrors.fullName === "Perfect!" &&
-      this.state.formErrors.birthDate === "" &&
-      this.state.formErrors.email === "Perfect!" &&
-      this.state.formErrors.gender === "Perfect!" &&
-      this.state.formErrors.address === "Perfect!" &&
-      this.state.formErrors.houseNumber === "Perfect!" &&
-      this.state.formErrors.zipcode === "Perfect!" &&
-      this.state.formErrors.file === "ok" &&
-      this.state.formErrors.letter === "ok"
-    ) {
-      Swal.fire(
-        "Thanks for submitting!",
-        "We will contact you soon!",
-        "success"
-      );
-    } else {
-      Swal.fire({
-        type: "error",
-        title: "Oops...",
-        text: "Something went wrong!"
-      });
-    }
-  }
   render() {
+    const { onChange, onSubmit, onHandleDate, state } = this.props;
     return (
       <div className="wrapper-padding">
         <h1 className="form-title">Job Application</h1>
@@ -153,7 +17,7 @@ class Form extends Component {
         </p>
 
         <div className="form-wrapper">
-          <form onSubmit={this.handleSubmit} className="form" noValidate>
+          <form onSubmit={onSubmit} className="form" noValidate>
             {/* name */}
             <div className="form-name form-item">
               <label className="form-label">
@@ -163,14 +27,12 @@ class Form extends Component {
                 className="form-field"
                 type="text"
                 name="fullName"
-                value={this.state.fullName}
-                onChange={this.handleChange}
+                value={state.fullName}
+                onChange={onChange}
                 placeholder="Katia Rojas Sandoval"
                 required
               />
-              <div className="form-message">
-                {this.state.formErrors.fullName}
-              </div>
+              <div className="form-message">{state.formErrors.fullName}</div>
             </div>
             {/* email */}
             <div className="form-email form-item">
@@ -181,12 +43,12 @@ class Form extends Component {
                 className="form-field"
                 name="email"
                 type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
+                value={state.email}
+                onChange={onChange}
                 placeholder="hola@endouble.com"
                 required
               />
-              <div className="form-message">{this.state.formErrors.email}</div>
+              <div className="form-message">{state.formErrors.email}</div>
             </div>
             {/* birthdate */}
             <div className="block-birthdate-gender">
@@ -197,9 +59,9 @@ class Form extends Component {
                 <DatePicker
                   className="form-field"
                   name="birthDate"
-                  selected={this.state.birthDate}
-                  onChange={this.handleDate}
-                  value={this.state.birthDate}
+                  selected={state.birthDate}
+                  onChange={onHandleDate}
+                  value={state.birthDate}
                   peekNextMonth
                   showMonthDropdown
                   showYearDropdown
@@ -210,13 +72,11 @@ class Form extends Component {
                 {/* <input
                   className="form-field"
                   name="birthDate"
-                  value={this.state.birthDate}
+                  value={state.birthDate}
                   placeholder="dd/mm/yyyy"
                   required
                 /> */}
-                <div className="form-message">
-                  {this.state.formErrors.birthDate}
-                </div>
+                <div className="form-message">{state.formErrors.birthDate}</div>
               </div>
 
               {/* gender */}
@@ -228,17 +88,15 @@ class Form extends Component {
                 <select
                   className="form-field"
                   name="gender"
-                  value={this.state.value}
-                  onChange={this.handleChange}
+                  value={state.value}
+                  onChange={onChange}
                   required
                 >
                   <option>Choose your gender</option>
                   <option>Female</option>
                   <option>Male</option>
                 </select>
-                <div className="form-message">
-                  {this.state.formErrors.gender}
-                </div>
+                <div className="form-message">{state.formErrors.gender}</div>
               </div>
             </div>
             {/* address */}
@@ -250,14 +108,12 @@ class Form extends Component {
                 className="form-field"
                 name="address"
                 type="text"
-                value={this.state.address}
-                onChange={this.handleChange}
+                value={state.address}
+                onChange={onChange}
                 placeholder="Streetname"
                 required
               />
-              <div className="form-message">
-                {this.state.formErrors.address}
-              </div>
+              <div className="form-message">{state.formErrors.address}</div>
 
               {/* house number */}
               <div className="block-number-zipcode">
@@ -266,13 +122,13 @@ class Form extends Component {
                     className="form-field"
                     name="houseNumber"
                     type="text"
-                    value={this.state.houseNumber}
-                    onChange={this.handleChange}
+                    value={state.houseNumber}
+                    onChange={onChange}
                     placeholder="House number"
                     required
                   />
                   <div className="form-message">
-                    {this.state.formErrors.houseNumber}
+                    {state.formErrors.houseNumber}
                   </div>
                 </div>
 
@@ -282,14 +138,12 @@ class Form extends Component {
                     className="form-field"
                     name="zipcode"
                     type="text"
-                    value={this.state.zipcode}
-                    onChange={this.handleChange}
+                    value={state.zipcode}
+                    onChange={onChange}
                     placeholder="Zipcode"
                     required
                   />
-                  <div className="form-message">
-                    {this.state.formErrors.zipcode}
-                  </div>
+                  <div className="form-message">{state.formErrors.zipcode}</div>
                 </div>
               </div>
             </div>
@@ -301,7 +155,7 @@ class Form extends Component {
                 name="file"
                 type="file"
                 accept=".doc, .docx, .pdf, .rtf, .txt"
-                onChange={this.handleChange}
+                onChange={onChange}
               />
             </div>
             {/* motivational letter */}
@@ -311,8 +165,8 @@ class Form extends Component {
                 className="form-field-text form-item"
                 name="letter"
                 type="text"
-                value={this.state.letter}
-                onChange={this.handleChange}
+                value={state.letter}
+                onChange={onChange}
                 placeholder="Let the company know more about you!"
               />
             </div>
@@ -321,7 +175,7 @@ class Form extends Component {
               <button
                 className="form-item form-submit-button"
                 type="button"
-                onClick={this.handleSubmit}
+                onClick={onSubmit}
               >
                 Submit
               </button>
